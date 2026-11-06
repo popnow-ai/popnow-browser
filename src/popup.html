@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>PopNow</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <img src="icons/icon-32.png" alt="" width="24" height="24" />
+        <h1>PopNow</h1>
+        <button id="settings" class="link" type="button">API key</button>
+      </header>
+
+      <section id="setup" hidden>
+        <label for="key">API key</label>
+        <input id="key" type="password" placeholder="sk-popnow-..." autocomplete="off" />
+        <button id="save-key" class="primary" type="button">Save</button>
+        <p class="hint">Create a key in the <a id="keys-link" target="_blank" rel="noopener">PopNow API console</a> and add funds to your API balance. The key stays in this browser.</p>
+      </section>
+
+      <section id="form" hidden>
+        <div class="tabs" role="tablist">
+          <button id="kind-image" role="tab" type="button" aria-selected="true">Image</button>
+          <button id="kind-video" role="tab" type="button" aria-selected="false">Video</button>
+        </div>
+        <label for="prompt">Prompt</label>
+        <textarea id="prompt" rows="4" placeholder="A paper boat on a rainy window sill, soft morning light"></textarea>
+        <label for="model">Model</label>
+        <select id="model"></select>
+        <button id="price" class="primary" type="button">Get price</button>
+        <div id="confirm" hidden>
+          <p id="confirm-text"></p>
+          <div class="row">
+            <button id="generate" class="primary" type="button">Generate</button>
+            <button id="cancel" type="button">Cancel</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="progress" hidden>
+        <p id="status" role="status"></p>
+        <p class="hint">You can close this window. The task keeps running and shows here when you come back.</p>
+      </section>
+
+      <section id="result" hidden>
+        <div id="media"></div>
+        <p id="result-text" class="hint"></p>
+        <div class="row">
+          <button id="download" class="primary" type="button">Download</button>
+          <button id="again" type="button">New</button>
+        </div>
+      </section>
+
+      <p id="error" role="alert" hidden></p>
+    </main>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

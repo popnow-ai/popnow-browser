@@ -1,0 +1,67 @@
+:root {
+  --ink: #2b1a33;
+  --muted: #6d5d75;
+  --paper: #fdf8f1;
+  --line: #e6dccf;
+  --accent: #ef6c2f;
+  --plum: #4b2a5e;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f6eee6;
+    --muted: #b6a8bd;
+    --paper: #221629;
+    --line: #443350;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  width: 360px;
+  background: var(--paper);
+  color: var(--ink);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+body.tab { width: auto; max-width: 480px; margin: 24px auto; }
+main { display: flex; flex-direction: column; gap: 12px; padding: 14px; }
+header { display: flex; align-items: center; gap: 8px; }
+header img { border-radius: 6px; }
+h1 { flex: 1; margin: 0; font-size: 16px; font-weight: 700; }
+section { display: flex; flex-direction: column; gap: 8px; }
+section[hidden], [hidden] { display: none; }
+label { font-weight: 600; font-size: 13px; }
+input, textarea, select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+textarea { resize: vertical; }
+button {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+button.primary { border-color: var(--accent); background: var(--accent); color: #fff; }
+button:disabled { opacity: 0.55; cursor: default; }
+button.link { padding: 0; border: 0; color: var(--muted); font-weight: 500; }
+.row { display: flex; gap: 8px; }
+.row .primary { flex: 1; }
+.tabs { display: flex; gap: 6px; }
+.tabs button { flex: 1; }
+.tabs [aria-selected="true"] { border-color: var(--plum); background: var(--plum); color: #fff; }
+.hint { margin: 0; color: var(--muted); font-size: 12px; }
+#confirm { display: flex; flex-direction: column; gap: 8px; }
+#confirm[hidden] { display: none; }
+#confirm p, #status { margin: 0; }
+#media img, #media video { display: block; width: 100%; border-radius: 8px; }
+#error { margin: 0; color: #c0392b; }
+a { color: inherit; }
