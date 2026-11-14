@@ -2,7 +2,7 @@
 
 Generate AI images and videos from any page with [PopNow](https://popnow.ai/api): Nano Banana, GPT Image, Seedream, FLUX, Kling, Seedance, MiniMax H3, Veo and more through one API key. Works in Chrome, Edge, Opera and Firefox.
 
-Built by PopNow AI ([popnow.ai](https://popnow.ai)), the world's first AI creative studio that pays you back.
+Built by PopNow AI ([popnow.ai](https://popnow.ai)), the world's first AI studio with automatic price protection.
 
 Requires a PopNow account and API balance.
 
