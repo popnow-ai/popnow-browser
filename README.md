@@ -18,7 +18,7 @@ Images with a public https address are sent to PopNow as a link. Images that onl
 
 ## Developers: API key mode
 
-Under **Developers** on the sign-in screen you can paste a PopNow API key instead. With a key, everything is billed in USD from your API balance and prices show in USD; the right-click tools use the developer MCP server at `https://api.popnow.ai/api/v1/mcp`, and the prompt box uses the REST API. Removing the key returns the extension to account mode.
+Under **Developers** on the sign-in screen you can paste a PopNow API key instead. With a key, everything is billed in USD from your PopNow balance (the same balance as on popnow.ai) and prices show in USD; the right-click tools use the developer MCP server at `https://api.popnow.ai/api/v1/mcp`, and the prompt box uses the REST API. Removing the key returns the extension to account mode.
 
 ## How it works
 
