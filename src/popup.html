@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>PopNow</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
@@ -10,46 +11,104 @@
       <header>
         <img src="icons/icon-32.png" alt="" width="24" height="24" />
         <h1>PopNow</h1>
-        <button id="settings" class="link" type="button">API key</button>
+        <a id="balance" class="chip" target="_blank" rel="noopener" hidden></a>
+        <button id="menu-button" class="icon" type="button" aria-label="Menu" aria-haspopup="menu" aria-expanded="false" hidden>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="5" cy="12" r="1.8" /><circle cx="12" cy="12" r="1.8" /><circle cx="19" cy="12" r="1.8" /></svg>
+        </button>
+        <div id="menu" role="menu" hidden>
+          <a id="menu-site" role="menuitem" href="https://popnow.ai" target="_blank" rel="noopener">Open popnow.ai</a>
+          <a id="menu-library" role="menuitem" href="https://popnow.ai/assets" target="_blank" rel="noopener">My library</a>
+          <a id="menu-credits" role="menuitem" href="https://popnow.ai/pricing" target="_blank" rel="noopener">Get credits</a>
+          <button id="menu-signout" role="menuitem" type="button">Sign out</button>
+        </div>
       </header>
 
-      <section id="setup" hidden>
-        <label for="key">API key</label>
-        <input id="key" type="password" placeholder="sk-popnow-..." autocomplete="off" />
-        <button id="save-key" class="primary" type="button">Save</button>
-        <p class="hint">Create a key in the <a id="keys-link" target="_blank" rel="noopener">PopNow API console</a> and add funds to your API balance. The key stays in this browser.</p>
+      <section id="signin" class="stack" hidden>
+        <img class="hero" src="icons/icon-128.png" alt="" width="64" height="64" />
+        <button id="login" class="primary" type="button">Sign in with PopNow</button>
+        <details id="developer">
+          <summary>Developers</summary>
+          <div class="stack tight">
+            <label for="key">API key</label>
+            <input id="key" type="password" placeholder="sk-popnow-..." autocomplete="off" />
+            <button id="save-key" type="button">Use this key</button>
+            <p class="hint">Billed in USD from your <a id="keys-link" target="_blank" rel="noopener">API console</a>.</p>
+          </div>
+        </details>
       </section>
 
-      <section id="form" hidden>
+      <section id="home" class="stack" hidden>
         <div class="tabs" role="tablist">
-          <button id="kind-image" role="tab" type="button" aria-selected="true">Image</button>
-          <button id="kind-video" role="tab" type="button" aria-selected="false">Video</button>
+          <button id="tab-create" role="tab" type="button" aria-selected="true">Create</button>
+          <button id="tab-creations" role="tab" type="button" aria-selected="false">My creations</button>
         </div>
-        <label for="prompt">Prompt</label>
-        <textarea id="prompt" rows="4" placeholder="A paper boat on a rainy window sill, soft morning light"></textarea>
-        <label for="model">Model</label>
-        <select id="model"></select>
-        <button id="price" class="primary" type="button">Get price</button>
-        <div id="confirm" hidden>
-          <p id="confirm-text"></p>
+
+        <div id="create" class="stack">
+          <div id="source" hidden>
+            <img id="source-img" alt="" />
+            <div class="source-text">
+              <strong id="action-title"></strong>
+              <span id="source-state" class="hint"></span>
+            </div>
+            <button id="source-clear" class="icon" type="button" aria-label="Start over">
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+            </button>
+          </div>
+
+          <div id="kind" class="segmented" role="radiogroup" aria-label="What to make">
+            <button id="kind-image" role="radio" type="button" aria-checked="true">Image</button>
+            <button id="kind-video" role="radio" type="button" aria-checked="false">Video</button>
+          </div>
+
+          <div id="prompt-row" class="stack tight">
+            <label for="prompt" id="prompt-label">Prompt</label>
+            <textarea id="prompt" rows="4" placeholder="A paper boat on a rainy window sill, soft morning light"></textarea>
+          </div>
+
+          <div id="choice-row" class="stack tight" hidden>
+            <label for="choice" id="choice-label"></label>
+            <select id="choice"></select>
+          </div>
+
+          <div id="model-row" class="stack tight">
+            <label for="model">Model</label>
+            <select id="model"></select>
+          </div>
+
+          <label id="consent-row" class="check" hidden>
+            <input id="consent" type="checkbox" />
+            <span id="consent-text"></span>
+          </label>
+
+          <button id="go" class="primary" type="button" disabled>Generate</button>
+          <p id="price-note" class="hint" hidden></p>
+          <button id="allow-upload" type="button" hidden>Allow uploads</button>
+          <button id="use-page-copy" class="link" type="button" hidden>Use the copy on this page instead</button>
+        </div>
+
+        <div id="progress" class="stack" hidden>
+          <div class="spinner" aria-hidden="true"></div>
+          <p id="status" role="status"></p>
+          <p class="hint">You can close this. PopNow lets you know when it's ready.</p>
+        </div>
+
+        <div id="result" class="stack" hidden>
+          <div id="media"></div>
+          <p id="result-text" class="hint"></p>
           <div class="row">
-            <button id="generate" class="primary" type="button">Generate</button>
-            <button id="cancel" type="button">Cancel</button>
+            <button id="download" class="primary" type="button">Download</button>
+            <button id="copy" type="button">Copy link</button>
+          </div>
+          <div class="row">
+            <button id="save" type="button">Save to my library</button>
+            <button id="again" type="button">New</button>
           </div>
         </div>
-      </section>
 
-      <section id="progress" hidden>
-        <p id="status" role="status"></p>
-        <p class="hint">You can close this window. The task keeps running and shows here when you come back.</p>
-      </section>
-
-      <section id="result" hidden>
-        <div id="media"></div>
-        <p id="result-text" class="hint"></p>
-        <div class="row">
-          <button id="download" class="primary" type="button">Download</button>
-          <button id="again" type="button">New</button>
+        <div id="creations" class="stack" hidden>
+          <ul id="creations-list"></ul>
+          <p id="creations-empty" class="hint" hidden>Nothing yet. What you make shows up here.</p>
+          <a id="creations-all" class="link" href="https://popnow.ai/assets" target="_blank" rel="noopener">All creations on popnow.ai</a>
         </div>
       </section>
 

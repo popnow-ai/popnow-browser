@@ -4,10 +4,11 @@ import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 
 rmSync("dist", { recursive: true, force: true });
 const base = JSON.parse(readFileSync("src/manifest.json", "utf8"));
+const { minimum_chrome_version: _chromeOnly, ...portable } = base;
 const targets = {
   chromium: base,
   firefox: {
-    ...base,
+    ...portable,
     background: { scripts: ["background.js"], type: "module" },
     browser_specific_settings: {
       gecko: { id: "extension@popnow.ai", strict_min_version: "128.0", data_collection_permissions: { required: ["authenticationInfo", "websiteContent"] } },

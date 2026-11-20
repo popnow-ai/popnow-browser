@@ -1,4 +1,4 @@
-const API_URL = "https://api.popnow.ai/api/v1";
+export const API_URL = "https://api.popnow.ai/api/v1";
 const TERMINAL_STATES = new Set(["succeeded", "failed", "canceled", "expired"]);
 
 export const KEYS_URL = "https://popnow.ai/api/console/keys";
@@ -39,12 +39,14 @@ export function extensionFor(mime) {
 }
 
 export class PopNowClient {
-  constructor(apiKey) {
+  constructor(apiKey, fetchImpl = (...args) => fetch(...args), apiUrl = API_URL) {
     this.apiKey = apiKey;
+    this.fetch = fetchImpl;
+    this.apiUrl = apiUrl;
   }
 
   async request(path, init = {}) {
-    const response = await fetch(`${API_URL}${path}`, {
+    const response = await this.fetch(`${this.apiUrl}${path}`, {
       ...init,
       headers: { Authorization: `Bearer ${this.apiKey}`, "Content-Type": "application/json", ...init.headers },
     });

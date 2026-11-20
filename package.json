@@ -1,0 +1,12 @@
+{
+  "name": "popnow-browser",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "PopNow browser extension for Chrome, Edge, Opera and Firefox.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test test/",
+    "build": "node scripts/build.mjs"
+  }
+}
