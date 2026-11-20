@@ -14,6 +14,6 @@ jobs:
         with:
           node-version: 22
       - name: Unit tests (fake PopNow server, no network)
-        run: node --test test/
+        run: node --test test/*.test.mjs
       - name: Build the Chromium and Firefox packages
         run: node scripts/build.mjs
